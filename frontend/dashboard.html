@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DigiTrust - Child Digital ID</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="bg-gray-50 min-h-screen">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg">
+      <div class="max-w-6xl mx-auto px-4">
+        <div class="flex justify-between items-center h-16">
+          <div class="flex-shrink-0">
+            <span class="text-2xl font-bold text-green-600">DigiTrust</span>
+          </div>
+          <div class="hidden md:flex space-x-8">
+            <a
+              href="dashboard.html"
+              class="text-gray-700 hover:text-green-600 px-3 py-2 rounded-md text-sm font-medium"
+              >Home</a
+            >
+            <a
+              href="#"
+              id="profileLink"
+              class="hidden text-gray-700 hover:text-green-600 px-3 py-2 rounded-md text-sm font-medium"
+              >Profile</a
+            >
+            <a
+              href="login.html"
+              id="loginLink"
+              class="text-gray-700 hover:text-green-600 px-3 py-2 rounded-md text-sm font-medium"
+              >Login</a
+            >
+            <a
+              href="register.html"
+              id="registerLink"
+              class="text-gray-700 hover:text-green-600 px-3 py-2 rounded-md text-sm font-medium"
+              >Register</a
+            >
+            <a
+              href="#"
+              id="logoutLink"
+              class="hidden text-gray-700 hover:text-green-600 px-3 py-2 rounded-md text-sm font-medium"
+              >Logout</a
+            >
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Main Content Area -->
+    <main class="max-w-6xl mx-auto mt-8 px-4">
+      <div id="UserInfo" class="flex justify-center"></div>
+    </main>
+
+    <script src="js/auth.js"></script>
+    <script src="js/main.js"></script>
+  </body>
+</html>

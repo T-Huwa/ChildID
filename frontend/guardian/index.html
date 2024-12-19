@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DigiTrust - Child Digital ID</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="bg-gray-50 min-h-screen">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg">
+      <div class="max-w-6xl mx-auto px-4">
+        <div class="flex justify-between items-center h-16">
+          <div class="flex-shrink-0">
+            <span class="text-2xl font-bold text-green-600">DigiTrust</span>
+          </div>
+          <div class="hidden md:flex space-x-8">
+            <a
+              href="dashboard.html"
+              class="text-gray-700 hover:text-green-600 px-3 py-2 rounded-md text-sm font-medium"
+              >Home</a
+            >
+            <a
+              href="#"
+              id="profileLink"
+              class="hidden text-gray-700 hover:text-green-600 px-3 py-2 rounded-md text-sm font-medium"
+              >Profile</a
+            >
+            <a
+              href="login.html"
+              id="loginLink"
+              class="text-gray-700 hover:text-green-600 px-3 py-2 rounded-md text-sm font-medium"
+              >Login</a
+            >
+            <a
+              href="register.html"
+              id="registerLink"
+              class="text-gray-700 hover:text-green-600 px-3 py-2 rounded-md text-sm font-medium"
+              >Register</a
+            >
+            <a
+              href="#"
+              id="logoutLink"
+              class="hidden text-gray-700 hover:text-green-600 px-3 py-2 rounded-md text-sm font-medium"
+              >Logout</a
+            >
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Main Content Area -->
+    <main class="max-w-6xl mx-auto mt-8 px-4">
+      <!-- Header Section -->
+      <div class="flex justify-between items-center mb-6">
+        <h1 class="text-2xl font-bold text-gray-800">Registered Children</h1>
+        <button
+          onclick="openModal()"
+          class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors"
+        >
+          Register New Child
+        </button>
+      </div>
+
+      <!-- Children Grid -->
+      <div
+        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+        id="childrenGrid"
+      >
+        <!-- Child Cards will be inserted here dynamically -->
+      </div>
+
+      <!-- Modal -->
+      <div
+        id="registerModal"
+        class="hidden fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full"
+      >
+        <div
+          class="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white"
+        >
+          <div class="mt-3">
+            <h3 class="text-lg font-medium leading-6 text-gray-900 mb-4">
+              Register New Child
+            </h3>
+            <form id="registerChildForm" class="space-y-4">
+              <div>
+                <label class="block text-sm font-medium text-gray-700"
+                  >Full Name</label
+                >
+                <input
+                  type="text"
+                  id="childName"
+                  required
+                  class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500"
+                />
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700"
+                  >Date of Birth</label
+                >
+                <input
+                  type="date"
+                  id="childDOB"
+                  required
+                  class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500"
+                />
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700"
+                  >Additional Details</label
+                >
+                <textarea
+                  id="childDetails"
+                  rows="3"
+                  class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500"
+                ></textarea>
+              </div>
+              <div class="flex justify-end space-x-3 mt-5">
+                <button
+                  type="button"
+                  onclick="closeModal()"
+                  class="px-4 py-2 bg-gray-200 text-gray-800 rounded-md hover:bg-gray-300"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  class="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700"
+                >
+                  Register
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <script src="main.js"></script>
+
+    <template id="childCardTemplate">
+      <div class="bg-white rounded-lg shadow-md p-6">
+        <div class="flex items-center justify-between mb-4">
+          <h3 class="text-lg font-semibold text-gray-800">{{name}}</h3>
+          <span class="px-2 py-1 text-sm rounded-full {{statusClass}}"
+            >{{status}}</span
+          >
+        </div>
+        <div class="space-y-2">
+          <p class="text-sm text-gray-600">
+            <span class="font-medium">ID Hash:</span> {{idHash}}
+          </p>
+          <p class="text-sm text-gray-600">
+            <span class="font-medium">DOB:</span> {{dob}}
+          </p>
+          <p class="text-sm text-gray-600">
+            <span class="font-medium">Registered:</span> {{registeredDate}}
+          </p>
+        </div>
+        <div class="mt-4 flex justify-end space-x-2">
+          <button
+            onclick="verifyAccess('{{idHash}}')"
+            class="px-3 py-1 text-sm bg-blue-100 text-blue-600 rounded hover:bg-blue-200"
+          >
+            Verify
+          </button>
+          <button
+            onclick="revokeAccess('{{idHash}}')"
+            class="px-3 py-1 text-sm bg-red-100 text-red-600 rounded hover:bg-red-200"
+          >
+            Revoke
+          </button>
+        </div>
+      </div>
+    </template>
+  </body>
+</html>
